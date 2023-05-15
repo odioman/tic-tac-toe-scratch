@@ -1,6 +1,6 @@
 const cells = document.querySelectorAll(".cell");
 const restartBtn = document.querySelector(".restart");
-const winnerAnnouncement = document.querySelector(".winnerAnnoucement");
+const message = document.querySelector(".message");
 const winConditions = [
     [0,1,2],
     [3,4,5],
@@ -10,26 +10,36 @@ const winConditions = [
     [2,5,8],
     [0,4,8],
     [2,4,6]
-]
-let playerX = "X"
-let playerO = "O"
+];
+let playerX = "X";
+let playerO = "O";
 let isPlayerOTurn = false;
-let board = ['','','','','','','','','']
+let board = ['','','','','','','','',''];
+let gameRunning = true;
+let turn;
 
-startGame();
+//switch players
+function switchPlayer() {
+    if (gameRunning) {
+        isPlayerOTurn ? playerX : playerO;
+    }
+}
+//append X's and O's to board
+function appendChoice() {
+    cells.forEach((cell) => cell.addEventListener('click', () => {
+        cell.textContent = turn === isPlayerOTurn ? 'X' : 'O'
+    }))
+}
+//announce whose turn it is
+function switchTurn() {
+    turn === isPlayerOTurn ? 'O' : 'X';
+    message.textContent = `${turn}'s turn`
+}
+//checkWinner by winConditions
 
 function startGame() {
-    cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+    appendChoice()
+    switchTurn();
 }
 
-function handleCellClick(e) {
-    const cellIndex = this.getAttribute("cellIndex")
-    const cell = e.target;
-    const currentPlayer = isPlayerOTurn ? playerO : playerX;
-    markBoard(cell, currentPlayer)
-}
-
-function markBoard(cell, currentPlayer) {
-    cell.classList.add(currentPlayer);
-}
-
+startGame()
