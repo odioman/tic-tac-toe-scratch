@@ -17,29 +17,29 @@ let isPlayerOTurn = false;
 let board = ['','','','','','','','',''];
 let gameRunning = true;
 let turn;
+let currentPlayer;
+let click = 0;
 
-//switch players
-function switchPlayer() {
-    if (gameRunning) {
-        isPlayerOTurn ? playerX : playerO;
-    }
-}
 //append X's and O's to board
 function appendChoice() {
     cells.forEach((cell) => cell.addEventListener('click', () => {
-        cell.textContent = turn === isPlayerOTurn ? 'X' : 'O'
+        if (click % 2 !== 0) {
+            cell.textContent = 'O';
+            message.textContent = "X's Turn";
+        } else if (click % 2 === 0) {
+            cell.textContent = 'X';
+            message.textContent = "O's Turn";
+        }
+        click++
+        console.log(click);
     }))
 }
-//announce whose turn it is
-function switchTurn() {
-    turn === isPlayerOTurn ? 'O' : 'X';
-    message.textContent = `${turn}'s turn`
-}
+//can't click on a square occupied by X or O
+
 //checkWinner by winConditions
 
 function startGame() {
-    appendChoice()
-    switchTurn();
+    appendChoice();
 }
 
 startGame()
