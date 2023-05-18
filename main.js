@@ -24,16 +24,17 @@ let click = 0;
 function appendChoice() {
   
 }
-//can't click on a square occupied by X or O
-function cantClick() {
-    
-    console.log("cantClick");
-}
-//checkWinner by winConditions
+
+
+
+startGame()
 
 function startGame() {
     appendChoice();
-    cantClick();
+    gameRunning = true;
+    checkWinner();
+    restartBtn.addEventListener('click', restartGame);
+    
 }
 
 //clickHandler
@@ -51,5 +52,46 @@ function handleCellClick(event) {
     console.log(cell);
 }
     cells.forEach((cell) => cell.addEventListener('click', handleCellClick))
-    cells.forEach((cell) => cell.removeEventListener('click', handleCellClick))
-startGame()
+
+//can't click on a square occupied by X or O
+function cantClick() {
+    //cells.forEach((cell) => cell.removeEventListener('click', handleCellClick))
+    console.log("cantClick");
+}
+
+//checkWinner by winConditions
+function checkWinner() {
+    let roundWon = false;
+    for (let i = 0; i < winConditions.length; i++) {
+        const conditions = winConditions[i];
+        const cellA = board[conditions[0]];
+        const cellB = board[conditions[1]];
+        const cellC = board[conditions[2]];
+
+        if (cellA == '' || cellB == '' || cellC == '') {
+            continue;
+        }
+        if (cellA == cellB && cellB == cellC) {
+            roundWon = true;
+            break;
+        }
+
+        if (roundWon) {
+            message.textContent = `${cellA.textContent} Wins!`
+            gameRunning = false;
+            console.log("winning")
+        } else if (!board.includes('')) {
+            message.textContent = "Draw!"
+            gameRunning = false;
+        } 
+    }
+}
+
+function restartGame() {
+    cells.forEach(cell => cell.textContent = '');
+    click = 0;
+    message.textContent = '';
+    
+}
+
+cantClick();
