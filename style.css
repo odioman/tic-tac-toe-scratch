@@ -1,11 +1,64 @@
 .cell {
-    width: 75px;
-    height: 50px;
+    width: 175px;
+    height: 175px;
     border: solid 2px;
+    font-size: 150px;
+    text-align: center;
 }
 
 .cellContainer {
     display: grid;
     grid-template-columns: repeat(3, 0fr);
     gap: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameContainer {
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 150px;
+}
+
+body {
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   font-family: 'Libre Franklin', sans-serif;
+   background-color: lightblue;
+}
+
+.message {
+    font-size: 50px;
+}
+
+#\30, #\31, #\32 {
+    border-top: none;
+} 
+
+#\36, #\37, #\38 {
+    border-bottom: none;
+} 
+
+#\32, #\35, #\38 {
+    border-right: none;
+}
+
+#\30, #\33, #\36 {
+    border-left: none;
+}
+
+button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

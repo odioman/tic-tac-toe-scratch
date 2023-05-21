@@ -58,8 +58,6 @@ function handleCellClick(event) {
  * @param {string} textContent - X or O
  */
 function updateBoard(id, textContent) {
-    //board = ['X', '', '', '', '', '', '', '']
-    //board[0] = 'X'
     board[id] = textContent;
 }
 
