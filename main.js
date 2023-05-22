@@ -12,21 +12,13 @@ const winConditions = [
     [0,4,8],
     [2,4,6]
 ];
-let playerX = "X";
-let playerO = "O";
-let isPlayerOTurn = false;
 let board = ['','','','','','','','',''];
-let gameRunning = true;
-let turn;
-let currentPlayer;
 let click = 0;
 
 function startGame() {
     appendChoice();
-    // not doing anything //gameRunning = true;
-    
+    //add click event to restartBtn in order to restart game
     restartBtn.addEventListener('click', restartGame);
-    
 }
 
 //append X's and O's to board
@@ -65,32 +57,24 @@ function updateBoard(id, textContent) {
 // checkWinner() should run after every turn, ie every click on a box;
 //checkWinner by winConditions
 function checkWinner() {
-    let roundWon = false;
     for (let i = 0; i < winConditions.length; i++) {
-        console.log(board);
         const conditions = winConditions[i];
         const cellA = board[conditions[0]];
-        console.log(cellA)
         const cellB = board[conditions[1]];
-        console.log(cellB)
         const cellC = board[conditions[2]];
-        console.log(cellC)
         //if any are empty, keep playing
         if (cellA == '' || cellB == '' || cellC == '') {
             continue;
         }
         //if the same mark is in cellA, cellB, cellC, win game
         if (cellA == cellB && cellB == cellC) {
-            roundWon = true;
             message.textContent = `${cellA} Wins!`
-           // gameRunning = false;
-            console.log("winning")
             //prevent additional Xs and Os from the game after a win
             cells.forEach(cell => cell.removeEventListener('click', handleCellClick));
             break;
+            //if no empty strings on board, and no winner, then draw
         } else if (!board.includes('')) {
             message.textContent = "Draw!"
-           // gameRunning = false;
         } 
     }
 }
@@ -102,9 +86,8 @@ function restartGame() {
     click = 0;
     //reset message
     message.textContent = '';
-   // gameRunning = true;
-   //board reset
-   board = ['','','','','','','','','']
+    //board reset
+    board = ['','','','','','','','','']
     startGame();
     
 }
@@ -115,4 +98,4 @@ function cantClick(cell) {
     cell.removeEventListener('click', handleCellClick);
 }
 
-startGame()
+startGame();
